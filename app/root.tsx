@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,6 +7,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import sharedStyles from "./styles/shared.css";
+
+import { MainHeader } from "./components/navigation/MainHeader";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -22,6 +25,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <MainHeader />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -30,3 +34,7 @@ export default function App() {
     </html>
   );
 }
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: sharedStyles }];
+};
